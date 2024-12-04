@@ -1,4 +1,6 @@
 using System.Data.SQLite;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace WinFormsApp1
 {
@@ -7,6 +9,21 @@ namespace WinFormsApp1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        // Method to hash passwords securely
+        private static string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder builder = new StringBuilder();
+                foreach (var b in bytes)
+                {
+                    builder.Append(b.ToString("x2")); // Convert to hexadecimal
+                }
+                return builder.ToString();
+            }
         }
 
         private void btnSignIn_Click(object sender, EventArgs e)
@@ -26,11 +43,14 @@ namespace WinFormsApp1
                 {
                     conn.Open();
 
+                    // Hash the password before querying the database
+                    string hashedPassword = HashPassword(password);
+
                     string query = "SELECT UserID FROM Users WHERE Username = @Username AND Password = @Password";
                     using (var cmd = new SQLiteCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@Username", username);
-                        cmd.Parameters.AddWithValue("@Password", password);
+                        cmd.Parameters.AddWithValue("@Password", hashedPassword);
                         object result = cmd.ExecuteScalar();
 
                         if (result != null)
@@ -56,7 +76,6 @@ namespace WinFormsApp1
             }
         }
 
-
         private void btnSignUp_Click(object sender, EventArgs e)
         {
             string username = textBox3.Text.Trim();
@@ -74,11 +93,14 @@ namespace WinFormsApp1
                 {
                     conn.Open();
 
+                    // Hash the password before storing it in the database
+                    string hashedPassword = HashPassword(password);
+
                     string query = "INSERT INTO Users (Username, Password) VALUES (@Username, @Password)";
                     using (var cmd = new SQLiteCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@Username", username);
-                        cmd.Parameters.AddWithValue("@Password", password); // Consider hashing the password for security
+                        cmd.Parameters.AddWithValue("@Password", hashedPassword); // Store hashed password
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -95,7 +117,6 @@ namespace WinFormsApp1
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        
-    }
+        }
     }
 }

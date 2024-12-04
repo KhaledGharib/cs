@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             dataGridViewTasks = new DataGridView();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewCheckBoxColumn();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             logOutToolStripMenuItem = new ToolStripMenuItem();
@@ -37,9 +40,6 @@
             btnAddTask = new Button();
             btnEditTask = new Button();
             btnDeleteTask = new Button();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridViewTasks).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -48,81 +48,12 @@
             // 
             dataGridViewTasks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewTasks.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3 });
-            dataGridViewTasks.Location = new Point(280, 188);
+            dataGridViewTasks.Location = new Point(49, 156);
             dataGridViewTasks.Name = "dataGridViewTasks";
             dataGridViewTasks.RowHeadersWidth = 82;
             dataGridViewTasks.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewTasks.Size = new Size(724, 462);
+            dataGridViewTasks.Size = new Size(686, 462);
             dataGridViewTasks.TabIndex = 0;
-            // 
-            // menuStrip1
-            // 
-            menuStrip1.ImageScalingSize = new Size(32, 32);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1926, 40);
-            menuStrip1.TabIndex = 1;
-            menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { logOutToolStripMenuItem, exitToolStripMenuItem });
-            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(71, 36);
-            fileToolStripMenuItem.Text = "File";
-            // 
-            // logOutToolStripMenuItem
-            // 
-            logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            logOutToolStripMenuItem.Size = new Size(359, 44);
-            logOutToolStripMenuItem.Text = "Log out";
-            logOutToolStripMenuItem.Click += logOutToolStripMenuItem_Click;
-            // 
-            // exitToolStripMenuItem
-            // 
-            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(359, 44);
-            exitToolStripMenuItem.Text = "Exit";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(280, 72);
-            label1.Name = "label1";
-            label1.Size = new Size(78, 32);
-            label1.TabIndex = 2;
-            label1.Text = "label1";
-            // 
-            // btnAddTask
-            // 
-            btnAddTask.Location = new Point(65, 152);
-            btnAddTask.Name = "btnAddTask";
-            btnAddTask.Size = new Size(150, 46);
-            btnAddTask.TabIndex = 3;
-            btnAddTask.Text = "Add";
-            btnAddTask.UseVisualStyleBackColor = true;
-            btnAddTask.Click += btnAddTask_Click;
-            // 
-            // btnEditTask
-            // 
-            btnEditTask.Location = new Point(69, 240);
-            btnEditTask.Name = "btnEditTask";
-            btnEditTask.Size = new Size(150, 46);
-            btnEditTask.TabIndex = 4;
-            btnEditTask.Text = "Edit";
-            btnEditTask.UseVisualStyleBackColor = true;
-            btnEditTask.Click += btnEditTask_Click;
-            // 
-            // btnDeleteTask
-            // 
-            btnDeleteTask.Location = new Point(75, 332);
-            btnDeleteTask.Name = "btnDeleteTask";
-            btnDeleteTask.Size = new Size(150, 46);
-            btnDeleteTask.TabIndex = 5;
-            btnDeleteTask.Text = "Delete";
-            btnDeleteTask.UseVisualStyleBackColor = true;
-            btnDeleteTask.Click += btnDeleteTask_Click;
             // 
             // Column1
             // 
@@ -148,11 +79,90 @@
             Column3.TrueValue = "Yes";
             Column3.Width = 200;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.ImageScalingSize = new Size(32, 32);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(796, 42);
+            menuStrip1.TabIndex = 1;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { logOutToolStripMenuItem, exitToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(71, 38);
+            fileToolStripMenuItem.Text = "File";
+            // 
+            // logOutToolStripMenuItem
+            // 
+            logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
+            logOutToolStripMenuItem.Size = new Size(359, 44);
+            logOutToolStripMenuItem.Text = "Log out";
+            logOutToolStripMenuItem.Click += logOutToolStripMenuItem_Click;
+            // 
+            // exitToolStripMenuItem
+            // 
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.Size = new Size(359, 44);
+            exitToolStripMenuItem.Text = "Exit";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Calibri", 16.125F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(145, 76);
+            label1.Name = "label1";
+            label1.Size = new Size(409, 53);
+            label1.TabIndex = 2;
+            label1.Text = "Welcome, Username!";
+            // 
+            // btnAddTask
+            // 
+            btnAddTask.Cursor = Cursors.Hand;
+            btnAddTask.Location = new Point(145, 694);
+            btnAddTask.Name = "btnAddTask";
+            btnAddTask.Size = new Size(150, 46);
+            btnAddTask.TabIndex = 3;
+            btnAddTask.Text = "Add";
+            btnAddTask.UseVisualStyleBackColor = true;
+            btnAddTask.Click += btnAddTask_Click;
+            // 
+            // btnEditTask
+            // 
+            btnEditTask.BackColor = Color.YellowGreen;
+            btnEditTask.Cursor = Cursors.Hand;
+            btnEditTask.ForeColor = SystemColors.ActiveCaptionText;
+            btnEditTask.Location = new Point(304, 694);
+            btnEditTask.Name = "btnEditTask";
+            btnEditTask.Size = new Size(150, 46);
+            btnEditTask.TabIndex = 4;
+            btnEditTask.Text = "Edit";
+            btnEditTask.UseVisualStyleBackColor = false;
+            btnEditTask.Click += btnEditTask_Click;
+            // 
+            // btnDeleteTask
+            // 
+            btnDeleteTask.BackColor = Color.IndianRed;
+            btnDeleteTask.Cursor = Cursors.Hand;
+            btnDeleteTask.FlatStyle = FlatStyle.Popup;
+            btnDeleteTask.ForeColor = SystemColors.Control;
+            btnDeleteTask.Location = new Point(471, 694);
+            btnDeleteTask.Name = "btnDeleteTask";
+            btnDeleteTask.Size = new Size(150, 46);
+            btnDeleteTask.TabIndex = 5;
+            btnDeleteTask.Text = "Delete";
+            btnDeleteTask.UseVisualStyleBackColor = false;
+            btnDeleteTask.Click += btnDeleteTask_Click;
+            // 
             // MainFrom
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1926, 820);
+            ClientSize = new Size(796, 820);
             Controls.Add(btnDeleteTask);
             Controls.Add(btnEditTask);
             Controls.Add(btnAddTask);

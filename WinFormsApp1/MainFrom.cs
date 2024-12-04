@@ -50,7 +50,7 @@ namespace WinFormsApp1
                                 bool isCompleted = reader.GetBoolean(2);
 
                                 // Add rows to DataGridView
-                                dataGridViewTasks.Rows.Add(taskId, taskDescription, isCompleted ? "Yes" : "No");
+                                dataGridViewTasks.Rows.Add(taskId, taskDescription, isCompleted ? 1 :0);
                             }
                         }
                     }
@@ -161,6 +161,35 @@ namespace WinFormsApp1
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void toggleStatus(object sender, DataGridViewCellEventArgs e)
+        {
+            int taskId = Convert.ToInt32(dataGridViewTasks.SelectedRows[0].Cells[0].Value);
+            int taskStatus = Convert.ToInt32(dataGridViewTasks.SelectedRows[0].Cells[2].Value);
+            int newStatus = taskStatus == 0 ? 1 :0;
+
+            try
+            {
+                using (var conn = new SQLiteConnection("Data Source=TaskOrganizer.db;Version=3;"))
+                {
+                    conn.Open();
+                    string query = "UPDATE Tasks SET IsCompleted = @IsCompleted  WHERE TaskID = @TaskID";
+
+                    using (var cmd = new SQLiteCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@IsCompleted", newStatus);
+                        cmd.Parameters.AddWithValue("@TaskID", taskId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                LoadTasks();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

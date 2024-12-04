@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             dataGridViewTasks = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewCheckBoxColumn();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             logOutToolStripMenuItem = new ToolStripMenuItem();
@@ -40,6 +37,9 @@
             btnAddTask = new Button();
             btnEditTask = new Button();
             btnDeleteTask = new Button();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridViewTasks).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -54,30 +54,7 @@
             dataGridViewTasks.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewTasks.Size = new Size(686, 462);
             dataGridViewTasks.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "Task ID:";
-            Column1.MinimumWidth = 10;
-            Column1.Name = "Column1";
-            Column1.ReadOnly = true;
-            Column1.Width = 200;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Task Description";
-            Column2.MinimumWidth = 10;
-            Column2.Name = "Column2";
-            Column2.Width = 200;
-            // 
-            // Column3
-            // 
-            Column3.FalseValue = "No";
-            Column3.HeaderText = "Status";
-            Column3.MinimumWidth = 10;
-            Column3.Name = "Column3";
-            Column3.TrueValue = "Yes";
-            Column3.Width = 200;
+            dataGridViewTasks.CellContentClick += toggleStatus;
             // 
             // menuStrip1
             // 
@@ -85,7 +62,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(796, 42);
+            menuStrip1.Size = new Size(796, 40);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -93,20 +70,20 @@
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { logOutToolStripMenuItem, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(71, 38);
+            fileToolStripMenuItem.Size = new Size(71, 36);
             fileToolStripMenuItem.Text = "File";
             // 
             // logOutToolStripMenuItem
             // 
             logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            logOutToolStripMenuItem.Size = new Size(359, 44);
+            logOutToolStripMenuItem.Size = new Size(229, 44);
             logOutToolStripMenuItem.Text = "Log out";
             logOutToolStripMenuItem.Click += logOutToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(359, 44);
+            exitToolStripMenuItem.Size = new Size(229, 44);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -157,6 +134,30 @@
             btnDeleteTask.Text = "Delete";
             btnDeleteTask.UseVisualStyleBackColor = false;
             btnDeleteTask.Click += btnDeleteTask_Click;
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "Task ID:";
+            Column1.MinimumWidth = 10;
+            Column1.Name = "Column1";
+            Column1.ReadOnly = true;
+            Column1.Width = 200;
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Task Description";
+            Column2.MinimumWidth = 10;
+            Column2.Name = "Column2";
+            Column2.Width = 200;
+            // 
+            // Column3
+            // 
+            Column3.FalseValue = "0";
+            Column3.HeaderText = "Status";
+            Column3.MinimumWidth = 10;
+            Column3.Name = "Column3";
+            Column3.TrueValue = "1";
+            Column3.Width = 200;
             // 
             // MainFrom
             // 
